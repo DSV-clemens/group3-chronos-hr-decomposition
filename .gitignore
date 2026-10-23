@@ -7,10 +7,6 @@ data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
-data/params/*
-!data/params/.gitkeep
-data/dlinear_corpus/*
-!data/dlinear_corpus/.gitkeep
 
 # Generated results — selective ignores
 results/dlinear_weights/*

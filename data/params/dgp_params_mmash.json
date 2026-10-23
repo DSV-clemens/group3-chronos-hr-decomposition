@@ -1,0 +1,368 @@
+{
+  "provenance": {
+    "dataset": "MMASH (HR per minute, 1 day per person)",
+    "extractor_version": "2.0",
+    "noise_scale": "robust (MAD, winsorised +-4)",
+    "n_subjects_with_ultradian_peak": 10,
+    "n_subjects": 22,
+    "files": {
+      "hr_1min_1.csv": "fa68ad375d32",
+      "hr_1min_10.csv": "eb79522fb766",
+      "hr_1min_11.csv": "25c4ecd4e366",
+      "hr_1min_12.csv": "d357877b7aa4",
+      "hr_1min_13.csv": "b6fb4de09469",
+      "hr_1min_14.csv": "ee1a0e788716",
+      "hr_1min_15.csv": "782eb4efcdf4",
+      "hr_1min_16.csv": "a320ce4efe6c",
+      "hr_1min_17.csv": "a87965994180",
+      "hr_1min_18.csv": "301756f7ffc1",
+      "hr_1min_19.csv": "5b0e5dfc4f2a",
+      "hr_1min_2.csv": "7aa7ffe8fbf7",
+      "hr_1min_20.csv": "5b1f035197cd",
+      "hr_1min_21.csv": "d21fb948e2e9",
+      "hr_1min_22.csv": "cf14483e5037",
+      "hr_1min_3.csv": "62e5a5a747e2",
+      "hr_1min_4.csv": "22765bcba46e",
+      "hr_1min_5.csv": "95eff5285334",
+      "hr_1min_6.csv": "b2e41d1afb9b",
+      "hr_1min_7.csv": "f73318150b04",
+      "hr_1min_8.csv": "c8facb4d5c29",
+      "hr_1min_9.csv": "1565dd15719c"
+    },
+    "extracted_on": "2026-10-23T11:36:15+00:00",
+    "method": "Median/trend/circadian/ACF/joint harmonic fit/AR(1)/jump percentiles per person, ranges = min/max across persons",
+    "calibrated_from_data": {
+      "baseline_range": true,
+      "slope_range": true,
+      "trend.circadian_amp_range": true,
+      "seasonal.period_range": true,
+      "seasonal.amp_range": true,
+      "ar": true,
+      "anomaly.spike_amp": true,
+      "anomaly.shift_amp": true,
+      "anomaly.spike_len": false,
+      "anomaly.drift_total": false
+    },
+    "n_sustained_shifts_total": 437
+  },
+  "hr_bounds": [
+    40,
+    200
+  ],
+  "baseline_range": [
+    63.9,
+    88.4
+  ],
+  "slope_range": [
+    -0.012,
+    0.0213
+  ],
+  "trend": {
+    "circadian_amp_range": [
+      2.4,
+      38.0
+    ],
+    "note": "Amplitude of the 1440-min harmonic (joint fit). Over a 768-min window this wave appears as smooth curvature and belongs to the TREND channel, not to the residual. Not consumed by generator v1."
+  },
+  "seasonal": {
+    "period_range": [
+      75,
+      448
+    ],
+    "amp_range": [
+      1.0,
+      8.7
+    ],
+    "note": "Ultradian component; the circadian wave (1440 min) does not fit the 768-min window and is represented by the trend channel."
+  },
+  "ar": {
+    "phi_range": [
+      0.643,
+      0.95
+    ],
+    "sigma_range": [
+      2.96,
+      9.96
+    ],
+    "noise_std_range": [
+      6.07,
+      15.62
+    ],
+    "note": "phi_range and sigma_range are marginal ranges. To stay inside the observed stationary variance, sample (phi, sigma) jointly from subject_level.ar_phi_sigma_pairs, or cap sigma/sqrt(1-phi^2) at noise_std_range[1]."
+  },
+  "anomaly": {
+    "spike_amp": {
+      "subtle": [
+        11.4,
+        17.1
+      ],
+      "moderate": [
+        20.1,
+        28.9
+      ],
+      "severe": [
+        25.0,
+        41.7
+      ]
+    },
+    "spike_len": {
+      "subtle": [
+        10,
+        30
+      ],
+      "moderate": [
+        15,
+        45
+      ],
+      "severe": [
+        20,
+        60
+      ]
+    },
+    "shift_amp": {
+      "subtle": [
+        12.2,
+        15.8
+      ],
+      "moderate": [
+        18.3,
+        23.9
+      ],
+      "severe": [
+        27.7,
+        44.1
+      ]
+    },
+    "drift_total": {
+      "subtle": [
+        4,
+        8
+      ],
+      "moderate": [
+        8,
+        16
+      ],
+      "severe": [
+        16,
+        30
+      ]
+    }
+  },
+  "subject_level": {
+    "median_hr_per_subject": [
+      86.2,
+      72.5,
+      69.5,
+      72.7,
+      74.6,
+      69.5,
+      88.4,
+      70.9,
+      88.0,
+      70.3,
+      72.2,
+      73.8,
+      69.4,
+      73.9,
+      67.1,
+      78.5,
+      72.2,
+      72.8,
+      87.3,
+      75.3,
+      71.2,
+      63.9
+    ],
+    "ar_phi_per_subject": [
+      0.847,
+      0.869,
+      0.809,
+      0.916,
+      0.759,
+      0.873,
+      0.925,
+      0.854,
+      0.865,
+      0.786,
+      0.843,
+      0.807,
+      0.829,
+      0.841,
+      0.796,
+      0.932,
+      0.802,
+      0.8,
+      0.807,
+      0.693,
+      0.844,
+      0.95
+    ],
+    "ar_sigma_per_subject": [
+      8.3,
+      4.77,
+      5.35,
+      3.92,
+      3.96,
+      4.09,
+      4.78,
+      3.7,
+      6.75,
+      4.57,
+      4.25,
+      6.93,
+      4.74,
+      5.43,
+      5.38,
+      3.79,
+      5.35,
+      4.6,
+      4.71,
+      5.33,
+      4.63,
+      4.56
+    ],
+    "ar_phi_sigma_pairs": [
+      [
+        0.847,
+        8.3
+      ],
+      [
+        0.869,
+        4.77
+      ],
+      [
+        0.809,
+        5.35
+      ],
+      [
+        0.916,
+        3.92
+      ],
+      [
+        0.759,
+        3.96
+      ],
+      [
+        0.873,
+        4.09
+      ],
+      [
+        0.925,
+        4.78
+      ],
+      [
+        0.854,
+        3.7
+      ],
+      [
+        0.865,
+        6.75
+      ],
+      [
+        0.786,
+        4.57
+      ],
+      [
+        0.843,
+        4.25
+      ],
+      [
+        0.807,
+        6.93
+      ],
+      [
+        0.829,
+        4.74
+      ],
+      [
+        0.841,
+        5.43
+      ],
+      [
+        0.796,
+        5.38
+      ],
+      [
+        0.932,
+        3.79
+      ],
+      [
+        0.802,
+        5.35
+      ],
+      [
+        0.8,
+        4.6
+      ],
+      [
+        0.807,
+        4.71
+      ],
+      [
+        0.693,
+        5.33
+      ],
+      [
+        0.844,
+        4.63
+      ],
+      [
+        0.95,
+        4.56
+      ]
+    ],
+    "noise_std_per_subject": [
+      15.62,
+      9.64,
+      9.11,
+      9.77,
+      6.07,
+      8.41,
+      12.56,
+      7.1,
+      13.46,
+      7.39,
+      7.9,
+      11.75,
+      8.47,
+      10.03,
+      8.88,
+      10.42,
+      8.97,
+      7.67,
+      7.98,
+      7.39,
+      8.63,
+      14.67
+    ],
+    "circadian_amp_per_subject": [
+      18.7,
+      6.3,
+      2.7,
+      23.8,
+      13.3,
+      11.4,
+      38.0,
+      13.4,
+      29.0,
+      2.4,
+      12.4,
+      19.5,
+      12.7,
+      11.6,
+      9.9,
+      19.7,
+      7.9,
+      3.3,
+      13.4,
+      16.4,
+      13.9,
+      23.4
+    ]
+  },
+  "notes": [
+    "Sensor artifacts (single spikes, dropouts, interpolated segments) are assumed removed in Phase 1; this script does not filter them itself.",
+    "Ranges are min/max across persons -> preserves heterogeneity; with more persons, q10/q90 can be used instead.",
+    "spike_len and drift_total are hard-coded defaults, not estimated from MMASH."
+  ]
+}
