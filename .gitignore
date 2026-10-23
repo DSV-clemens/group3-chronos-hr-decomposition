@@ -9,8 +9,6 @@ data/processed/*
 !data/processed/.gitkeep
 
 # Generated results — selective ignores
-results/dlinear_weights/*
-!results/dlinear_weights/.gitkeep
 results/stl_context_*.parquet
 results/periods_decomp_acf_*.parquet
 results/forecasts_decomp_*.parquet          # old arm
