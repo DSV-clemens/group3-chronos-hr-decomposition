@@ -1,0 +1,30 @@
+{
+  "label": "naive",
+  "model": null,
+  "device": "auto (cuda if available)",
+  "quantiles": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "context": 512,
+  "horizon": 256,
+  "max_series": null,
+  "n_series": {
+    "residual": 150,
+    "trend": 150,
+    "none": 150
+  },
+  "scenarios": [
+    "residual",
+    "trend",
+    "none"
+  ],
+  "dgp": {
+    "dgp_hash": "82057932bd10",
+    "params_sha256": "d640c993d95310970c2e6a62133444ada14ebb22007b7052cafd621bd9d27bc6",
+    "generator_version": "hr-dgp-mmash-1.3"
+  },
+  "runtime_sec": 0.8,
+  "created": "2026-10-23T11:37:57+00:00"
+}

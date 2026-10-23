@@ -1,0 +1,33 @@
+{
+  "label": "dlinear",
+  "model": "DLinear-style global ridge regression (standardised sliding windows, direct multi-output)",
+  "reference": "Zeng et al., AAAI 2023",
+  "quantiles": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "context": 512,
+  "horizon": 256,
+  "input_len": 64,
+  "ridge": 1.0,
+  "trained_on": "separate corpus in data\\dlinear_corpus (generate_dlinear_corpus.py, seed 6677); benchmark series (seed 67) never seen in training",
+  "weights_dir": "results\\dlinear_weights",
+  "n_train_windows": {
+    "residual": 673500,
+    "trend": 673500,
+    "none": 673500
+  },
+  "n_series": {
+    "residual": 150,
+    "trend": 150,
+    "none": 150
+  },
+  "scenarios": [
+    "residual",
+    "trend",
+    "none"
+  ],
+  "runtime_sec": 106.2,
+  "created": "2026-10-23T11:41:51+00:00"
+}

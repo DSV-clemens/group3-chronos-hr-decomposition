@@ -1,0 +1,709 @@
+{
+  "created": "2026-10-23T13:29:27+00:00",
+  "dgp_provenance": {
+    "dgp_hash": "82057932bd10",
+    "params_sha256": "d640c993d95310970c2e6a62133444ada14ebb22007b7052cafd621bd9d27bc6",
+    "seed": 67,
+    "n_series": 150
+  },
+  "checks": {
+    "provenance": [
+      "manifest 'dlinear': no DGP provenance recorded (dgp_hash/params_sha256 missing in manifest)",
+      "manifest 'windowshap': no DGP provenance recorded (dgp_hash/params_sha256 missing in manifest)"
+    ],
+    "completeness": [],
+    "plausibility": []
+  },
+  "manifests": {
+    "chronos2": {
+      "label": "chronos2",
+      "model": "amazon/chronos-2",
+      "device": "auto (cuda if available)",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ],
+      "context": 512,
+      "horizon": 256,
+      "max_series": null,
+      "n_series": {
+        "residual": 150,
+        "trend": 150,
+        "none": 150
+      },
+      "scenarios": [
+        "residual",
+        "trend",
+        "none"
+      ],
+      "dgp": {
+        "dgp_hash": "82057932bd10",
+        "params_sha256": "d640c993d95310970c2e6a62133444ada14ebb22007b7052cafd621bd9d27bc6",
+        "generator_version": "hr-dgp-mmash-1.3"
+      },
+      "runtime_sec": 36.2,
+      "created": "2026-10-23T11:37:43+00:00"
+    },
+    "decomp_acf": {
+      "label": "decomp_acf",
+      "model": "amazon/chronos-2",
+      "device": "auto (cuda if available)",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ],
+      "context": 512,
+      "horizon": 256,
+      "max_series": null,
+      "n_series": {
+        "residual": 150,
+        "trend": 150,
+        "none": 150
+      },
+      "scenarios": [
+        "residual",
+        "trend",
+        "none"
+      ],
+      "decomposition": {
+        "method": "STL (statsmodels, robust)",
+        "seasonal_period": "ACF estimated from context window only (no DGP metadata)",
+        "period_search_range": [
+          60,
+          448
+        ],
+        "period_fallback": 254,
+        "acf_min_peak": 0.1
+      },
+      "recomposition": "quantile-wise sum (comonotone approximation)",
+      "dgp": {
+        "dgp_hash": "82057932bd10",
+        "params_sha256": "d640c993d95310970c2e6a62133444ada14ebb22007b7052cafd621bd9d27bc6",
+        "generator_version": "hr-dgp-mmash-1.3"
+      },
+      "runtime_sec": 48.7,
+      "created": "2026-10-23T11:43:07+00:00"
+    },
+    "dlinear": {
+      "label": "dlinear",
+      "model": "DLinear-style global ridge regression (standardised sliding windows, direct multi-output)",
+      "reference": "Zeng et al., AAAI 2023",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ],
+      "context": 512,
+      "horizon": 256,
+      "input_len": 64,
+      "ridge": 1.0,
+      "trained_on": "separate corpus in data\\dlinear_corpus (generate_dlinear_corpus.py, seed 6677); benchmark series (seed 67) never seen in training",
+      "weights_dir": "results\\dlinear_weights",
+      "n_train_windows": {
+        "residual": 673500,
+        "trend": 673500,
+        "none": 673500
+      },
+      "n_series": {
+        "residual": 150,
+        "trend": 150,
+        "none": 150
+      },
+      "scenarios": [
+        "residual",
+        "trend",
+        "none"
+      ],
+      "runtime_sec": 106.2,
+      "created": "2026-10-23T11:41:51+00:00"
+    },
+    "naive": {
+      "label": "naive",
+      "model": null,
+      "device": "auto (cuda if available)",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ],
+      "context": 512,
+      "horizon": 256,
+      "max_series": null,
+      "n_series": {
+        "residual": 150,
+        "trend": 150,
+        "none": 150
+      },
+      "scenarios": [
+        "residual",
+        "trend",
+        "none"
+      ],
+      "dgp": {
+        "dgp_hash": "82057932bd10",
+        "params_sha256": "d640c993d95310970c2e6a62133444ada14ebb22007b7052cafd621bd9d27bc6",
+        "generator_version": "hr-dgp-mmash-1.3"
+      },
+      "runtime_sec": 0.8,
+      "created": "2026-10-23T11:37:57+00:00"
+    },
+    "windowshap": {
+      "method": "WindowSHAP (model-agnostic, exact Shapley over window subsets)",
+      "windowshap_version": "windowshap-1.2 (batched + parallel STL)",
+      "pipelines": [
+        "raw",
+        "decomp"
+      ],
+      "n_windows": 8,
+      "n_model_calls_per_series": 256,
+      "value_functions": [
+        "median (mean forecast median)",
+        "band (mean q90-q10 width)"
+      ],
+      "background": "per-series context median",
+      "model": "amazon/chronos-2",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ],
+      "context": 512,
+      "horizon": 256,
+      "windows": 8,
+      "scenarios": [
+        "residual",
+        "trend"
+      ],
+      "created": "2026-10-23T11:44:11+00:00"
+    }
+  },
+  "metrics_per_label_scenario": [
+    {
+      "label": "chronos2",
+      "scenario": "none",
+      "mae_median": 11.304389115137475,
+      "mae_mean": 12.601518744937048,
+      "mae_std": 5.87610380857357,
+      "wql_median": 0.10044638717325916,
+      "wql_mean": 0.10784538735122981,
+      "wql_std": 0.04333600144641474,
+      "coverage_median": 0.77734375,
+      "coverage_mean": 0.744921875,
+      "coverage_std": 0.20177426943564108,
+      "n_series": 150
+    },
+    {
+      "label": "chronos2",
+      "scenario": "residual",
+      "mae_median": 12.023268660029244,
+      "mae_mean": 14.749807178344623,
+      "mae_std": 8.779479770942253,
+      "wql_median": 0.0879628511390505,
+      "wql_mean": 0.10376660773557567,
+      "wql_std": 0.04813039568651257,
+      "coverage_median": 0.892578125,
+      "coverage_mean": 0.7983854166666666,
+      "coverage_std": 0.22650318280621068,
+      "n_series": 150
+    },
+    {
+      "label": "chronos2",
+      "scenario": "trend",
+      "mae_median": 14.06351599265616,
+      "mae_mean": 16.508942479925334,
+      "mae_std": 9.044954608488165,
+      "wql_median": 0.1033393740790278,
+      "wql_mean": 0.11750727872113627,
+      "wql_std": 0.056589467547037114,
+      "coverage_median": 0.7578125,
+      "coverage_mean": 0.66625,
+      "coverage_std": 0.2711600989465379,
+      "n_series": 150
+    },
+    {
+      "label": "decomp_acf",
+      "scenario": "none",
+      "mae_median": 11.590885926422057,
+      "mae_mean": 13.349599791715736,
+      "mae_std": 6.288966596153088,
+      "wql_median": 0.10509466546310922,
+      "wql_mean": 0.1176773189984745,
+      "wql_std": 0.049756143630278624,
+      "coverage_median": 0.775390625,
+      "coverage_mean": 0.7277604166666667,
+      "coverage_std": 0.19535074429818217,
+      "n_series": 150
+    },
+    {
+      "label": "decomp_acf",
+      "scenario": "residual",
+      "mae_median": 13.743062635260673,
+      "mae_mean": 15.865758146028616,
+      "mae_std": 7.897576854503667,
+      "wql_median": 0.09689291603369822,
+      "wql_mean": 0.11381841769727634,
+      "wql_std": 0.057385410484125925,
+      "coverage_median": 0.841796875,
+      "coverage_mean": 0.76765625,
+      "coverage_std": 0.20555998888145266,
+      "n_series": 150
+    },
+    {
+      "label": "decomp_acf",
+      "scenario": "trend",
+      "mae_median": 13.836448524571004,
+      "mae_mean": 16.538132447153565,
+      "mae_std": 9.029405696207133,
+      "wql_median": 0.098699170945352,
+      "wql_mean": 0.12304430250191586,
+      "wql_std": 0.06400993103839822,
+      "coverage_median": 0.71875,
+      "coverage_mean": 0.6527083333333333,
+      "coverage_std": 0.25267101065299474,
+      "n_series": 150
+    },
+    {
+      "label": "dlinear",
+      "scenario": "none",
+      "mae_median": 10.316036693792315,
+      "mae_mean": 11.504390927836567,
+      "mae_std": 4.641755123927823,
+      "wql_median": 0.09255959893878682,
+      "wql_mean": 0.09853992432825814,
+      "wql_std": 0.03780530878752362,
+      "coverage_median": 0.875,
+      "coverage_mean": 0.8272395833333334,
+      "coverage_std": 0.1754865904369001,
+      "n_series": 150
+    },
+    {
+      "label": "dlinear",
+      "scenario": "residual",
+      "mae_median": 12.294661197906377,
+      "mae_mean": 13.994112461692913,
+      "mae_std": 6.58380183998027,
+      "wql_median": 0.08892740963544025,
+      "wql_mean": 0.10174123371032834,
+      "wql_std": 0.05266423248702141,
+      "coverage_median": 0.94140625,
+      "coverage_mean": 0.8953125,
+      "coverage_std": 0.14469589468051655,
+      "n_series": 150
+    },
+    {
+      "label": "dlinear",
+      "scenario": "trend",
+      "mae_median": 10.69629781066898,
+      "mae_mean": 12.85896451588553,
+      "mae_std": 5.909534375920187,
+      "wql_median": 0.08058663016479217,
+      "wql_mean": 0.0909838531746433,
+      "wql_std": 0.035771898767558485,
+      "coverage_median": 0.875,
+      "coverage_mean": 0.8015364583333333,
+      "coverage_std": 0.20647808437962017,
+      "n_series": 150
+    },
+    {
+      "label": "naive",
+      "scenario": "none",
+      "mae_median": 11.36336994328375,
+      "mae_mean": 13.265866088989595,
+      "mae_std": 6.995854471211201,
+      "wql_median": 0.17966227841510135,
+      "wql_mean": 0.18712366498201866,
+      "wql_std": 0.047465902517744164,
+      "coverage_median": 0.99609375,
+      "coverage_mean": 0.9887760416666667,
+      "coverage_std": 0.025052282635644647,
+      "n_series": 150
+    },
+    {
+      "label": "naive",
+      "scenario": "residual",
+      "mae_median": 11.292056216793394,
+      "mae_mean": 13.65116527777684,
+      "mae_std": 7.46155951273198,
+      "wql_median": 0.14744586577151192,
+      "wql_mean": 0.15615625369567035,
+      "wql_std": 0.04509009338809469,
+      "coverage_median": 0.99609375,
+      "coverage_mean": 0.988828125,
+      "coverage_std": 0.023420147029566973,
+      "n_series": 150
+    },
+    {
+      "label": "naive",
+      "scenario": "trend",
+      "mae_median": 12.778818619262658,
+      "mae_mean": 15.608662949807098,
+      "mae_std": 8.987569743205691,
+      "wql_median": 0.15743039057138447,
+      "wql_mean": 0.16352409815112337,
+      "wql_std": 0.04070488610645155,
+      "coverage_median": 0.99609375,
+      "coverage_mean": 0.9864322916666667,
+      "coverage_std": 0.04214382377714528,
+      "n_series": 150
+    }
+  ],
+  "windowshap": {
+    "manifest": {
+      "method": "WindowSHAP (model-agnostic, exact Shapley over window subsets)",
+      "windowshap_version": "windowshap-1.2 (batched + parallel STL)",
+      "pipelines": [
+        "raw",
+        "decomp"
+      ],
+      "n_windows": 8,
+      "n_model_calls_per_series": 256,
+      "value_functions": [
+        "median (mean forecast median)",
+        "band (mean q90-q10 width)"
+      ],
+      "background": "per-series context median",
+      "model": "amazon/chronos-2",
+      "quantiles": [
+        0.1,
+        0.5,
+        0.9
+      ],
+      "context": 512,
+      "horizon": 256,
+      "windows": 8,
+      "scenarios": [
+        "residual",
+        "trend"
+      ],
+      "created": "2026-10-23T11:44:11+00:00"
+    },
+    "summary_tables": {
+      "residual": [
+        {
+          "pipeline": "decomp",
+          "window": 0,
+          "phi_median_mean": -0.1932981970045302,
+          "phi_median_std": 1.4347545738585024,
+          "phi_median_mae": 1.0565660583859398,
+          "phi_band_mean": 1.746143791926404,
+          "phi_band_std": 6.906733894466027,
+          "phi_band_mae": 4.866140368470715
+        },
+        {
+          "pipeline": "decomp",
+          "window": 1,
+          "phi_median_mean": -0.15939667256673168,
+          "phi_median_std": 1.8806494387547512,
+          "phi_median_mae": 1.3081434730650887,
+          "phi_band_mean": 0.8671065291943294,
+          "phi_band_std": 6.425307063817853,
+          "phi_band_mae": 4.426421622170697
+        },
+        {
+          "pipeline": "decomp",
+          "window": 2,
+          "phi_median_mean": 0.06782308626931807,
+          "phi_median_std": 1.7205501477900098,
+          "phi_median_mae": 1.1071674671475848,
+          "phi_band_mean": 1.5395144277939963,
+          "phi_band_std": 8.634561583682332,
+          "phi_band_mae": 5.480022540229299
+        },
+        {
+          "pipeline": "decomp",
+          "window": 3,
+          "phi_median_mean": 0.009177750239296532,
+          "phi_median_std": 1.24514034474405,
+          "phi_median_mae": 0.8671580074249751,
+          "phi_band_mean": -3.9582805888646893,
+          "phi_band_std": 8.375272442542691,
+          "phi_band_mae": 6.644978096472009
+        },
+        {
+          "pipeline": "decomp",
+          "window": 4,
+          "phi_median_mean": -0.3598103284078931,
+          "phi_median_std": 1.7037838172334399,
+          "phi_median_mae": 1.2273998568095856,
+          "phi_band_mean": -8.201010949542953,
+          "phi_band_std": 8.063818202724068,
+          "phi_band_mae": 8.99197114247592
+        },
+        {
+          "pipeline": "decomp",
+          "window": 5,
+          "phi_median_mean": -0.6154289226229229,
+          "phi_median_std": 2.2495140825193864,
+          "phi_median_mae": 1.7975387397645006,
+          "phi_band_mean": -5.737652956844677,
+          "phi_band_std": 11.202561251837688,
+          "phi_band_mae": 8.209789045990814
+        },
+        {
+          "pipeline": "decomp",
+          "window": 6,
+          "phi_median_mean": -3.1632686284988645,
+          "phi_median_std": 5.969209508580251,
+          "phi_median_mae": 4.8681725053938605,
+          "phi_band_mean": -10.97711851764423,
+          "phi_band_std": 13.530487436548217,
+          "phi_band_mae": 12.695762129784928
+        },
+        {
+          "pipeline": "decomp",
+          "window": 7,
+          "phi_median_mean": -12.57716435938033,
+          "phi_median_std": 17.005877003336014,
+          "phi_median_mae": 16.480213238610162,
+          "phi_band_mean": -28.916136580988884,
+          "phi_band_std": 15.766213207405352,
+          "phi_band_mae": 28.916136580988884
+        },
+        {
+          "pipeline": "raw",
+          "window": 0,
+          "phi_median_mean": -1.3510723569733756,
+          "phi_median_std": 2.2218413299747612,
+          "phi_median_mae": 1.8442958670949179,
+          "phi_band_mean": -8.25017986111662,
+          "phi_band_std": 7.785136622361426,
+          "phi_band_mae": 9.232030695846747
+        },
+        {
+          "pipeline": "raw",
+          "window": 1,
+          "phi_median_mean": 0.0838813420477367,
+          "phi_median_std": 0.9258785002512431,
+          "phi_median_mae": 0.6276499414822413,
+          "phi_band_mean": 4.338553886089415,
+          "phi_band_std": 6.5509654937715975,
+          "phi_band_mae": 5.954351754457113
+        },
+        {
+          "pipeline": "raw",
+          "window": 2,
+          "phi_median_mean": 0.7519979033924283,
+          "phi_median_std": 1.5338038130427392,
+          "phi_median_mae": 1.115476429205092,
+          "phi_band_mean": 9.567135426290806,
+          "phi_band_std": 7.582993327210215,
+          "phi_band_mae": 9.944457997988966
+        },
+        {
+          "pipeline": "raw",
+          "window": 3,
+          "phi_median_mean": -0.47035933446884165,
+          "phi_median_std": 1.483502643905659,
+          "phi_median_mae": 1.0517665785759214,
+          "phi_band_mean": -1.928137439018795,
+          "phi_band_std": 7.5325814158860895,
+          "phi_band_mae": 5.851087405866691
+        },
+        {
+          "pipeline": "raw",
+          "window": 4,
+          "phi_median_mean": -0.9369819240040249,
+          "phi_median_std": 2.412374920817233,
+          "phi_median_mae": 1.6610562115245393,
+          "phi_band_mean": -10.9147799182209,
+          "phi_band_std": 8.527410264516064,
+          "phi_band_mae": 11.555321553209115
+        },
+        {
+          "pipeline": "raw",
+          "window": 5,
+          "phi_median_mean": -0.07170124172785924,
+          "phi_median_std": 1.4936935563482228,
+          "phi_median_mae": 1.1270791463927616,
+          "phi_band_mean": -10.211203633483084,
+          "phi_band_std": 10.710650546950232,
+          "phi_band_mae": 11.487863521630448
+        },
+        {
+          "pipeline": "raw",
+          "window": 6,
+          "phi_median_mean": -0.5665601410714407,
+          "phi_median_std": 2.923491503746016,
+          "phi_median_mae": 1.979979563508715,
+          "phi_band_mean": -13.837038357888542,
+          "phi_band_std": 17.429704298181285,
+          "phi_band_mae": 16.604528616244945
+        },
+        {
+          "pipeline": "raw",
+          "window": 7,
+          "phi_median_mean": -8.054729963340456,
+          "phi_median_std": 12.587416777405533,
+          "phi_median_mae": 10.946591370408498,
+          "phi_band_mean": -22.169953168143003,
+          "phi_band_std": 18.169101834430503,
+          "phi_band_mae": 23.71671034189266
+        }
+      ],
+      "trend": [
+        {
+          "pipeline": "decomp",
+          "window": 0,
+          "phi_median_mean": 0.07971072260538735,
+          "phi_median_std": 1.2302507895962282,
+          "phi_median_mae": 0.8739954640827481,
+          "phi_band_mean": 0.14888569017227682,
+          "phi_band_std": 6.030068068035118,
+          "phi_band_mae": 4.091685782470638
+        },
+        {
+          "pipeline": "decomp",
+          "window": 1,
+          "phi_median_mean": 0.1683698930286225,
+          "phi_median_std": 1.650248354491218,
+          "phi_median_mae": 1.0439947092570956,
+          "phi_band_mean": 1.0022797725009067,
+          "phi_band_std": 6.930916809855633,
+          "phi_band_mae": 4.5037442245145165
+        },
+        {
+          "pipeline": "decomp",
+          "window": 2,
+          "phi_median_mean": 0.17309577021523123,
+          "phi_median_std": 1.274942353211554,
+          "phi_median_mae": 0.8949188572111583,
+          "phi_band_mean": 0.09697385222736843,
+          "phi_band_std": 5.9658913770613475,
+          "phi_band_mae": 4.134945801436191
+        },
+        {
+          "pipeline": "decomp",
+          "window": 3,
+          "phi_median_mean": 0.05251315943400066,
+          "phi_median_std": 1.1800862264249035,
+          "phi_median_mae": 0.8149426357329839,
+          "phi_band_mean": -5.107290644668634,
+          "phi_band_std": 8.537514858103151,
+          "phi_band_mae": 6.924999007784421
+        },
+        {
+          "pipeline": "decomp",
+          "window": 4,
+          "phi_median_mean": -0.022547983563135417,
+          "phi_median_std": 1.1768429256389243,
+          "phi_median_mae": 0.8633674650646394,
+          "phi_band_mean": -7.811263313884063,
+          "phi_band_std": 9.381352174921274,
+          "phi_band_mae": 8.752293944180249
+        },
+        {
+          "pipeline": "decomp",
+          "window": 5,
+          "phi_median_mean": -0.025045090024433433,
+          "phi_median_std": 1.7500445343766864,
+          "phi_median_mae": 1.3332722791035974,
+          "phi_band_mean": -4.95655047306584,
+          "phi_band_std": 8.42019527645262,
+          "phi_band_mae": 6.298869903251529
+        },
+        {
+          "pipeline": "decomp",
+          "window": 6,
+          "phi_median_mean": -0.663751454429021,
+          "phi_median_std": 3.795122429118575,
+          "phi_median_mae": 2.794439206865099,
+          "phi_band_mean": -5.180744421575041,
+          "phi_band_std": 7.448541380564456,
+          "phi_band_mae": 6.881314938197769
+        },
+        {
+          "pipeline": "decomp",
+          "window": 7,
+          "phi_median_mean": -4.303364304376028,
+          "phi_median_std": 12.913112791691406,
+          "phi_median_mae": 10.429311898912703,
+          "phi_band_mean": -22.690148687211533,
+          "phi_band_std": 14.334529016877466,
+          "phi_band_mae": 22.814406343457954
+        },
+        {
+          "pipeline": "raw",
+          "window": 0,
+          "phi_median_mean": -0.590793365266588,
+          "phi_median_std": 1.531788214576323,
+          "phi_median_mae": 1.0993330009399898,
+          "phi_band_mean": -6.880151892253804,
+          "phi_band_std": 7.619795533750907,
+          "phi_band_mae": 7.936757627592674
+        },
+        {
+          "pipeline": "raw",
+          "window": 1,
+          "phi_median_mean": -0.026880905242193394,
+          "phi_median_std": 0.8537393306657824,
+          "phi_median_mae": 0.5776605094122509,
+          "phi_band_mean": 2.9951218851080963,
+          "phi_band_std": 7.121627270392566,
+          "phi_band_mae": 5.714421451499774
+        },
+        {
+          "pipeline": "raw",
+          "window": 2,
+          "phi_median_mean": 0.2616058021121555,
+          "phi_median_std": 1.257228445597833,
+          "phi_median_mae": 0.8346038391173832,
+          "phi_band_mean": 7.562953520662727,
+          "phi_band_std": 7.728812876712695,
+          "phi_band_mae": 7.977215123175629
+        },
+        {
+          "pipeline": "raw",
+          "window": 3,
+          "phi_median_mean": -0.029956829646277126,
+          "phi_median_std": 1.0723136532327016,
+          "phi_median_mae": 0.7606465057191394,
+          "phi_band_mean": -2.4297037006943,
+          "phi_band_std": 7.015517422967927,
+          "phi_band_mae": 5.370087259359775
+        },
+        {
+          "pipeline": "raw",
+          "window": 4,
+          "phi_median_mean": -0.13408761012364934,
+          "phi_median_std": 1.4229541202785798,
+          "phi_median_mae": 0.9497401515112981,
+          "phi_band_mean": -9.339970042576391,
+          "phi_band_std": 7.435890638122978,
+          "phi_band_mae": 9.84260611384752
+        },
+        {
+          "pipeline": "raw",
+          "window": 5,
+          "phi_median_mean": 0.16942398697989322,
+          "phi_median_std": 1.0370860358723288,
+          "phi_median_mae": 0.7445758428119477,
+          "phi_band_mean": -7.9246639191929305,
+          "phi_band_std": 9.1344678980387,
+          "phi_band_mae": 9.083682162458226
+        },
+        {
+          "pipeline": "raw",
+          "window": 6,
+          "phi_median_mean": 0.178423526188684,
+          "phi_median_std": 1.7519630886370026,
+          "phi_median_mae": 1.038195637839181,
+          "phi_band_mean": -6.462886134370452,
+          "phi_band_std": 10.90294551966079,
+          "phi_band_mae": 9.165038686428515
+        },
+        {
+          "pipeline": "raw",
+          "window": 7,
+          "phi_median_mean": -3.051411413677155,
+          "phi_median_std": 9.06398047313924,
+          "phi_median_mae": 6.655321545525203,
+          "phi_band_mean": -18.627346330757653,
+          "phi_band_std": 16.192450047313034,
+          "phi_band_mae": 19.450297659054165
+        }
+      ]
+    }
+  }
+}

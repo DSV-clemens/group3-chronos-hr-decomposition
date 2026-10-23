@@ -1,0 +1,29 @@
+{
+  "method": "WindowSHAP (model-agnostic, exact Shapley over window subsets)",
+  "windowshap_version": "windowshap-1.2 (batched + parallel STL)",
+  "pipelines": [
+    "raw",
+    "decomp"
+  ],
+  "n_windows": 8,
+  "n_model_calls_per_series": 256,
+  "value_functions": [
+    "median (mean forecast median)",
+    "band (mean q90-q10 width)"
+  ],
+  "background": "per-series context median",
+  "model": "amazon/chronos-2",
+  "quantiles": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "context": 512,
+  "horizon": 256,
+  "windows": 8,
+  "scenarios": [
+    "residual",
+    "trend"
+  ],
+  "created": "2026-10-23T11:44:11+00:00"
+}

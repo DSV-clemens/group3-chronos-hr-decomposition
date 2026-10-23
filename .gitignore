@@ -24,9 +24,9 @@ results/report_summary.md
 results/flat_median_diagnosis.md
 
 # Generated plots + viewers — keep empty dir, ignore contents
-plots/*
-!plots/.gitkeep
-*.html
+#plots/*
+#!plots/.gitkeep
+#*.html
 
 # Local
 .venv/

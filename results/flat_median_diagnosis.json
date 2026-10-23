@@ -1,0 +1,48 @@
+{
+  "label": "chronos2",
+  "scenarios": {
+    "none": {
+      "n_series": 150,
+      "median_std_median": 1.8934171199798584,
+      "flat_median_share": 0.6133333333333333,
+      "band_width_median_bpm": 32.52484893798828,
+      "band_coverage_median": 0.77734375,
+      "band_covers_ge_80pct_share": 0.4666666666666667,
+      "abs_level_shift_median_bpm": 4.758263947782702,
+      "large_shift_gt15_share": 0.08,
+      "flat_and_large_shift_share": 0.04666666666666667,
+      "corr_ctx_end_vs_fc_start_level": 0.843609043832138,
+      "corr_ctx_slope_vs_fc_slope": -0.2552937486258787,
+      "fc_start_level_minus_ctx_end_mean_bpm": -0.5264677804374551
+    },
+    "residual": {
+      "n_series": 150,
+      "median_std_median": 2.874739408493042,
+      "flat_median_share": 0.46,
+      "band_width_median_bpm": 46.472307205200195,
+      "band_coverage_median": 0.892578125,
+      "band_covers_ge_80pct_share": 0.6533333333333333,
+      "abs_level_shift_median_bpm": 5.7667549861181655,
+      "large_shift_gt15_share": 0.14666666666666667,
+      "flat_and_large_shift_share": 0.08666666666666667,
+      "corr_ctx_end_vs_fc_start_level": 0.9088953466603644,
+      "corr_ctx_slope_vs_fc_slope": -0.4365121291082501,
+      "fc_start_level_minus_ctx_end_mean_bpm": -2.403221181781313
+    },
+    "trend": {
+      "n_series": 150,
+      "median_std_median": 2.172046661376953,
+      "flat_median_share": 0.5666666666666667,
+      "band_width_median_bpm": 32.190635681152344,
+      "band_coverage_median": 0.7578125,
+      "band_covers_ge_80pct_share": 0.4266666666666667,
+      "abs_level_shift_median_bpm": 5.520617596371906,
+      "large_shift_gt15_share": 0.12,
+      "flat_and_large_shift_share": 0.07333333333333333,
+      "corr_ctx_end_vs_fc_start_level": 0.856874899364497,
+      "corr_ctx_slope_vs_fc_slope": -0.3471618334944394,
+      "fc_start_level_minus_ctx_end_mean_bpm": -0.826976357177157
+    }
+  },
+  "created": "2026-10-23T11:43:53+00:00"
+}
