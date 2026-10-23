@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+
+# Generated data (from MMASH) — keep empty dirs, ignore contents
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/params/*
+!data/params/.gitkeep
+data/dlinear_corpus/*
+!data/dlinear_corpus/.gitkeep
+
+# Generated results — selective ignores
+results/dlinear_weights/*
+!results/dlinear_weights/.gitkeep
+results/stl_context_*.parquet
+results/periods_decomp_acf_*.parquet
+results/forecasts_decomp_*.parquet          # old arm
+results/manifest_decomp.json
+results/*_old.*
+results/report_summary.md
+results/flat_median_diagnosis.md
+
+# Generated plots + viewers — keep empty dir, ignore contents
+plots/*
+!plots/.gitkeep
+*.html
+
+# Local
+.venv/

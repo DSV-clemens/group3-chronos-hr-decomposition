@@ -1,0 +1,12 @@
+# Pipeline (phases 01-03, 05)
+numpy>=1.24
+pandas>=2.0
+matplotlib>=3.7
+pyarrow>=14        # parquet I/O (scripts have a CSV fallback, but parquet is preferred)
+
+# Forecast model (phase 04)
+torch>=2.1
+chronos-forecasting>=2.0
+statsmodels>=0.14   # STL decomposition (phase 06)
+scipy>=1.10        # ACF peak search for seasonal period estimation
+joblib>=1.3        # parallel STL (phase 06/07)
