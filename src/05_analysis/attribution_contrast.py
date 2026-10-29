@@ -9,8 +9,9 @@ the position-controlled contrast contrast_pc = mean of c_w over the windows in
 which both classes occur (windows 4-7).
 
 Differences between pipelines (decomp minus raw) are assessed with a paired
-bootstrap: whole series are resampled with replacement and both contrasts are
-recomputed per resample, mirroring analyze_uncertainty.py.
+bootstrap: whole series are resampled with replacement (a series drawn k times
+contributes k times to every groupby mean) and both contrasts are recomputed
+per resample, mirroring analyze_uncertainty.py.
 
 Inputs (produced by plot_event_attribution.py):
     results/windowshap_enriched_{scenario}.csv
@@ -84,15 +85,23 @@ def main() -> None:
                 )
 
         # Paired bootstrap over whole series; recompute both contrasts per resample.
+        # A series drawn k times contributes k copies to the resample, so groupby
+        # means weight it k times (same semantics as analyze_uncertainty.py).
+        # Pre-index per-series frames once for speed (concat of 150 small frames
+        # per resample is much faster than filtering the full frame per series).
+        by_pipe = {pipe: enriched[enriched.pipeline == pipe] for pipe in PIPELINES}
+        series_frames = {
+            pipe: {s: by_pipe[pipe][by_pipe[pipe].series_id == s] for s in series_ids}
+            for pipe in PIPELINES
+        }
         diffs = {val: np.empty(args.bootstrap_reps) for val in VALUE_FUNCTIONS}
         for i in range(args.bootstrap_reps):
             sample = rng.choice(series_ids, size=len(series_ids), replace=True)
             for val in VALUE_FUNCTIONS:
                 pc = []
                 for pipe in PIPELINES:
-                    sub = enriched[(enriched.pipeline == pipe)
-                                   & (enriched.series_id.isin(sample))]
-                    pc.append(per_window_contrast(sub, val))
+                    resampled = pd.concat([series_frames[pipe][s] for s in sample])
+                    pc.append(per_window_contrast(resampled, val))
                 diffs[val][i] = pc[1] - pc[0]
 
         for val in VALUE_FUNCTIONS:
