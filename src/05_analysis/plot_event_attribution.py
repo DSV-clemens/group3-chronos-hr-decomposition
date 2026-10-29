@@ -138,15 +138,18 @@ def main() -> None:
             ax = axes[i][j]
             prof = next(p for s, pl, p in per_position if s == scen and pl == pipe)
             x = np.arange(len(prof))
+            width = 0.4
             if True in prof.columns:
-                ax.bar(x, prof[True], color=colors["event"], label="window contains event")
+                ax.bar(x - width / 2, prof[True], width=width, color=colors["event"],
+                       label="window contains event")
             if False in prof.columns:
-                ax.bar(x, prof[False], color=colors["clean"], label="clean window")
+                ax.bar(x + width / 2, prof[False], width=width, color=colors["clean"],
+                       label="clean window")
             ax.set_title(f"{scen} — {pipe} pipeline", fontsize=11)
             ax.set_xlabel("context window (0 = oldest, 7 = newest 64 min)")
             if j == 0:
                 ax.set_ylabel(r"mean $|\phi_{\mathrm{median}}|$ (bpm)")
-            ax.legend(fontsize=8)
+            ax.legend(fontsize=8, loc="upper center", ncol=2)
             ax.set_xticks(x)
     fig.suptitle("Where the model looks before deciding: Shapley attribution of context windows,\n"
                  "windows containing ground-truth anomalies vs. clean windows",
