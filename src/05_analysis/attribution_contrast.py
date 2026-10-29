@@ -6,7 +6,8 @@ inflated by a position confound, because anomalies are injected only in the
 second half of the context (windows 0-3 are always clean). This script computes
 the per-window contrast c_w (event vs. clean within the same window index) and
 the position-controlled contrast contrast_pc = mean of c_w over the windows in
-which both classes occur (windows 4-7).
+which both classes occur (windows 4-7 in the residual scenario, windows 4-6 in the trend scenario, 
+where window 7 contains an anomaly in all series and has no clean counterpart)
 
 Differences between pipelines (decomp minus raw) are assessed with a paired
 bootstrap: whole series are resampled with replacement (a series drawn k times
