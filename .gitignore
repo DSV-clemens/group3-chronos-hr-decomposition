@@ -1,26 +1,29 @@
 # Python
 __pycache__/
 *.pyc
+.venv/
 
-# Generated data (from MMASH) — keep empty dirs, ignore contents
+# ── Data ──
+# Raw MMASH must be downloaded from PhysioNet (see README)
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
 
-# Generated results — selective ignores
+# DLinear training corpus: regenerable on CPU in minutes
+# (generate_dlinear_corpus.py, seed 6677). Trained weights stay in the repo
+# (results/dlinear_weights/), so forecasts run without the corpus.
+data/dlinear_corpus/*
+!data/dlinear_corpus/.gitkeep
+
+# ── Results: intermediate artifacts ──
 results/stl_context_*.parquet
 results/periods_decomp_acf_*.parquet
-results/forecasts_decomp_*.parquet          # old arm
 results/manifest_decomp.json
 results/*_old.*
 results/report_summary.md
 results/flat_median_diagnosis.md
 
-# Generated plots + viewers — keep empty dir, ignore contents
-#plots/*
-#!plots/.gitkeep
-#*.html
-
-# Local
-.venv/
+# ── Generated viewers: regenerate via src/05_analysis/view_*.py ──
+# Paper snapshots are distributed as GitHub Release assets, not in git.
+*.html
