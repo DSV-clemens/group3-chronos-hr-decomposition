@@ -19,12 +19,11 @@ _Department of Computer and Systems Sciences, Stockholm University_ (Group 3).
   scenario and increased the Interval Score significantly on clean signals
   (+6.54 [1.94, 11.27]).
 - **Explainability:** the attribution contrast gain (3.8x → 6.4x) does not
-  survive position control — it is a recency-weighting artifact, not improved
+  survive position control, it is a recency-weighting artifact, not improved
   anomaly recognition.
 
 Conclusion: for zero-shot forecasting today, direct Chronos-2 on raw signals
-remains the better default. See `docs/metrics_map.md` for where every reported
-number lives in this repository.
+remains the better default. See [docs/metrics_map.md](docs/metrics_map.md) for where every number lives in the repository.
 
 ## Repository structure
 
@@ -139,7 +138,7 @@ python src/05_analysis/collect_metrics.py --results-dir results --data-dir data/
 
 ### Steps 06a–c — WindowSHAP explainability
 
-`window_shap.py` requires 256 model calls per series, pipeline and scenario —
+`window_shap.py` requires 256 model calls per series, pipeline and scenario,
 **GPU strongly recommended, expect hours**. Its outputs are committed, so the
 analysis steps below also run directly on committed data.
 
@@ -168,5 +167,5 @@ python src/05_analysis/view_metrics_dashboard.py --results-dir results --data-di
 
 ## Data and model attribution
 
-- MMASH dataset (Rossi et al., 2020), PhysioNet — separate license, not redistributed here.
-- Chronos-2 (Ansari et al., 2025) — pre-trained weights via `chronos-forecasting`.
+- MMASH dataset (Rossi et al., 2020), PhysioNet, separate license, not redistributed here.
+- Chronos-2 (Ansari et al., 2025), pre-trained weights via `chronos-forecasting`.
