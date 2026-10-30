@@ -10,6 +10,10 @@ position-controlled contrast).
 **Authors:** Alexandra Kordali, Clemens Pretzler, Mikaela Rantza,
 _Department of Computer and Systems Sciences, Stockholm University_ (Group 3).
 
+> **AI usage:** This project was completed with AI support as permitted by
+> [DSV's AI policy](https://www.su.se/english/divisions/department-of-computer-and-systems-sciences/education/during-your-studies/dsvs-ai-policy).
+> The use of AI tools is declared in [`AI_USAGE.md`](AI_USAGE.md).
+
 ## Key findings (TL;DR)
 
 - **Accuracy:** unaffected. Median MAE of the STL pipeline matches direct
